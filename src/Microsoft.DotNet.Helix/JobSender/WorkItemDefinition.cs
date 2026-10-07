@@ -28,6 +28,7 @@ internal class WorkItemDefinition : IWorkItemDefinitionWithCommand,
     public string WorkItemName { get; private set; }
     public TimeSpan Timeout { get; private set; }
     public IPayload Payload { get; private set; }
+    public string TestResultsCacheKey { get; private set; }
 
     public IWorkItemDefinitionWithPayload WithCommand(string command)
     {
@@ -38,6 +39,12 @@ internal class WorkItemDefinition : IWorkItemDefinitionWithCommand,
     public IWorkItemDefinition WithTimeout(TimeSpan timeout)
     {
         Timeout = timeout;
+        return this;
+    }
+
+    public IWorkItemDefinition WithTestResultsCacheKey(string testResultsCacheKey)
+    {
+        TestResultsCacheKey = testResultsCacheKey;
         return this;
     }
 
@@ -122,6 +129,7 @@ internal class WorkItemDefinition : IWorkItemDefinitionWithCommand,
             Command = Command,
             TimeoutInSeconds = (int) Timeout.TotalSeconds,
             PayloadUri = await Payload.UploadAsync(payloadStorage, log, cancellationToken),
+            TestResultsCacheKey = TestResultsCacheKey,
         };
     }
 }

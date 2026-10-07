@@ -21,6 +21,14 @@ public interface IWorkItemDefinition
     IWorkItemDefinition WithTimeout(TimeSpan timeout);
 
     /// <summary>
+    /// Associates the work item with a test-result cache identity.
+    /// </summary>
+    /// <param name="testResultsCacheKey">
+    /// A lowercase, 64-character SHA-256 value covering every payload and environment input that can affect the test result.
+    /// </param>
+    IWorkItemDefinition WithTestResultsCacheKey(string testResultsCacheKey);
+
+    /// <summary>
     /// Complete work item and return to specification of the overarching job.
     /// </summary>
     /// <returns>Fluent job builder.</returns>

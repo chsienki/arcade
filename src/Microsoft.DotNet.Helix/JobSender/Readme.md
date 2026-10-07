@@ -104,6 +104,7 @@ var job = await api.Job.Define()
   .DefineWorkItem("Diskspd")
   .WithCommand("amd64\\diskspd.exe C:")
   .WithPayloadUri(new Uri("https://gallery.technet.microsoft.com/DiskSpd-A-Robust-Storage-6ef84e62/file/199535/1/DiskSpd-2.0.20a.zip"))
+  .WithTestResultsCacheKey("0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef")
   .AttachToJob()
   .SendAsync();
 

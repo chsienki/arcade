@@ -35,6 +35,7 @@ public class SendHelixJob : HelixTask, IMultiThreadableTask
         public const string PayloadUri = "PayloadUri";
         public const string Timeout = "Timeout";
         public const string Command = "Command";
+        public const string TestResultsCacheKey = "TestResultsCacheKey";
         public const string PreCommands = "PreCommands";
         public const string PostCommands = "PostCommands";
 
@@ -127,6 +128,7 @@ public class SendHelixJob : HelixTask, IMultiThreadableTask
     ///     PayloadArchive - An archive that will be sent up as the Work Item payload
     ///     PayloadUri - An uri of the archive that will be sent up as the Work Item payload
     ///     Timeout - A <see cref="System.TimeSpan"/> string that specifies that Work Item execution timeout
+    ///     TestResultsCacheKey - A lowercase, 64-character SHA-256 value identifying reusable test results
     ///     PreCommands
     ///       A collection of commands that will run for this work item before the 'Command' Runs
     ///       Use ';' to separate commands and escape a ';' with ';;'
@@ -455,6 +457,13 @@ public class SendHelixJob : HelixTask, IMultiThreadableTask
         else
         {
             Log.LogMessage(MessageImportance.Low, "  Default Timeout");
+        }
+
+        string testResultsCacheKey = workItem.GetMetadata(MetadataNames.TestResultsCacheKey);
+        if (!string.IsNullOrEmpty(testResultsCacheKey))
+        {
+            wi = wi.WithTestResultsCacheKey(testResultsCacheKey);
+            Log.LogMessage(MessageImportance.Low, $"  Test Results Cache Key: '{testResultsCacheKey}'");
         }
 
         return wi.AttachToJob();

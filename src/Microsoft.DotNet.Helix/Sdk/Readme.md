@@ -497,6 +497,9 @@ Given a local folder `$(TestFolder)` containing `runtests.cmd`, this will run `r
       <!-- A TimeSpan that specifies the work item execution timeout -->
       <Timeout>00:30:00</Timeout>
 
+      <!-- Optional SHA-256 identity for reusable test results -->
+      <TestResultsCacheKey>0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef</TestResultsCacheKey>
+
       <!-- Commands that will run before the work item command -->
       <PreCommands>echo 'pepperoni';echo 'cheese'</PreCommands>
 

@@ -64,6 +64,9 @@
   <ItemGroup Condition="'$(EnableHelixJobMonitor)' == 'true' and '$(_HelixJobMonitorTestRunName)' != ''">
     <HelixProperties Include="TestRunName" Value="$(_HelixJobMonitorTestRunName)" />
   </ItemGroup>
+  <ItemGroup Condition="'$(EnableHelixJobMonitor)' == 'true'">
+    <HelixProperties Include="TestResultCacheReplayVersion" Value="1" />
+  </ItemGroup>
   
   <ItemGroup Condition="Exists('$(HelixTestConfigurationFilePath)')">
     <HelixCorrelationPayload Include="$(HelixTestConfigurationFilePath)" AsArchive="false" />

@@ -106,6 +106,9 @@ Behavior notes:
   independent from result upload latency.
 - If a failed work item has no parseable test results, the monitor uploads a synthetic failed `<work item>.WorkItemExecution` result. Passed work items without results do not produce a synthetic result.
 - The reporter is safe to rerun because it checks for already-completed test runs and only processes new results.
+- Submitted Helix jobs include `TestResultCacheReplayVersion=1`, allowing the
+  service to distinguish jobs whose results can be replayed through the
+  standalone monitor from jobs that rely on the machine-side reporter.
 
 #### What changes for pipeline users when the monitor is on
 
